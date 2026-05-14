@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    index.html — Egypt Wonders Home Page
+    =====================================
+    This is the entry point of the entire project.
+    It shows the 9 regions organized into 4 geographic groups.
+
+    WHY the regions are hardcoded here (not loaded from JSON):
+    - There are only 9 regions. They represent permanent geography.
+    - Hardcoding means this page needs ZERO JavaScript to display.
+    - It loads instantly and is simple to read and understand.
+    - Landmarks (90+) are dynamic and DO use JS + JSON.
+
+    Structure of this file:
+    1. <head>   — metadata, CSS links
+    2. <header> — the fixed navigation bar
+    3. <main>   — hero section + regions section
+    4. <footer> — site footer
+    5. <script> — JS link (nav.js only — no page-specific JS needed)
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title — appears in the browser tab -->
+    <title>Egypt Wonders — Explore the Heritage</title>
+
+    <!-- Meta description — describes the page for search engines and previews -->
+    <meta name="description" content="Explore Egypt's most remarkable landmarks organized by region. From the Pyramids of Giza to the Mediterranean coast of Alexandria.">
+
+    <!-- Load our two CSS files. Order matters: global first, then page-specific.
+         global.css provides the foundation (variables, nav, footer).
+         home.css adds the home-page-specific styles on top. -->
+    <link rel="stylesheet" href="css/global.css?v=6">
+    <link rel="stylesheet" href="css/home.css?v=4">
+</head>
+
+<body>
+
+    <!-- Giant background typography to fill empty space -->
+    <div class="bg-watermark" aria-hidden="true">WONDERS</div>
+
+    <!-- =========================================================
+         NAVIGATION BAR
+         Identical across all pages. nav.js handles:
+         - Highlighting the active link (Home is active here)
+         - Dark/light mode toggle
+         ========================================================= -->
+    <header class="site-nav transparent" role="banner">
+        <nav class="nav-inner container" aria-label="Main navigation">
+
+            <!-- Logo — links back to the home page -->
+            <a href="index.html" class="nav-logo">Egypt Wonders</a>
+
+            <!-- Right side: links + mode toggle + sign in -->
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <!-- href must match the exact filename for nav.js to detect active state -->
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <!-- Static Sign In link. nav.js hides this and shows greeting when logged in. -->
+                <a href="auth.html" id="nav-signin" class="nav-auth-btn btn-solid" aria-label="Sign in to your account">Sign In</a>
+
+                <!-- Dark mode toggle. JS in nav.js handles the click.
+                     aria-label makes it accessible for screen readers. -->
+                <button class="nav-mode-btn" id="mode-toggle" aria-label="Toggle dark mode">
+                    🌙
+                </button>
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+         page-content class adds padding-top equal to nav height
+         so content doesn't hide behind the fixed nav bar.
+         ========================================================= -->
+    <main class="page-content">
+
+        <!-- ─────────────────────────────────────────────────────
+             HERO SECTION
+             The video is set to autoplay, loop, and mute (required for autoplay).
+             It stays behind the dark overlay so text remains readable.
+             ───────────────────────────────────────────────────── -->
+        <section class="hero" aria-label="Hero banner">
+
+            <!-- Video background -->
+            <video class="hero-video" autoplay loop muted playsinline poster="assets/images/Great_Pyramid_of_Giza/0.jpg">
+                <source src="assets/videos/hero-bg.mp4" type="video/mp4">
+            </video>
+
+            <!-- Darkening overlay so white text is always readable -->
+            <div class="hero-overlay" aria-hidden="true"></div>
+
+            <div class="hero-content">
+                <span class="hero-eyebrow">Discover Egypt</span>
+                <h1 class="hero-title">Seven Thousand Years<br>of Wonder</h1>
+                <p class="hero-subtitle">
+                    From the last surviving Wonder of the Ancient World to the turquoise
+                    waters of the Red Sea, explore the monuments that shaped human history.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ─────────────────────────────────────────────────────
+             CTA SECTION
+             ───────────────────────────────────────────────────── -->
+        <section class="cta-section reveal-element">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Start Exploring</h2>
+                    <p class="cta-text">Choose a region below to discover its unique landmarks, historical significance, and exact coordinates.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────────────────────
+             REGIONS SECTION
+             8 regions displayed in a unified grid.
+             ───────────────────────────────────────────────────── -->
+        <section class="regions-section reveal-element" aria-label="Explore by region">
+            <div class="container">
+                <div class="region-grid">
+
+                        <!-- Cairo — 22 landmarks, most diverse region -->
+                        <a class="region-card" href="region.html?id=cairo" aria-label="Explore Cairo region">
+                            <img class="region-card-img" src="assets/images/Cairo_Tower/0.jpg" alt="Cairo Tower, the iconic landmark of modern Cairo" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">22 Landmarks</span>
+                                    <h3 class="region-card-name">Cairo</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">The vibrant heart of modern Egypt, home to towering minarets, bustling souks, and endless history.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Giza & Pyramids — 12 landmarks, the most iconic -->
+                        <a class="region-card" href="region.html?id=giza_pyramids" aria-label="Explore Giza and Pyramids region">
+                            <img class="region-card-img" src="assets/images/Great_Pyramid_of_Giza/0.jpg" alt="The Great Pyramid of Giza at sunset" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">12 Landmarks</span>
+                                    <h3 class="region-card-name">Giza &amp; Pyramids</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">The iconic plateau housing the last surviving Wonder of the Ancient World and the Great Sphinx.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Luxor & Thebes — 12 landmarks, ancient temples -->
+                        <a class="region-card" href="region.html?id=luxor_thebes" aria-label="Explore Luxor and Thebes region">
+                            <img class="region-card-img" src="assets/images/Karnak_precinct_of_Amun-Ra/0.jpg" alt="The great columns of Karnak temple complex" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">12 Landmarks</span>
+                                    <h3 class="region-card-name">Luxor &amp; Thebes</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">The world's greatest open-air museum, featuring unimaginably vast temples and royal tombs.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Aswan & Nubia — 10 landmarks, temples and the dam -->
+                        <a class="region-card" href="region.html?id=aswan_nubia" aria-label="Explore Aswan and Nubia region">
+                            <img class="region-card-img" src="assets/images/Temple_of_Isis_in_Philae/0.jpg" alt="The Temple of Isis rising from the waters of Philae" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">10 Landmarks</span>
+                                    <h3 class="region-card-name">Aswan &amp; Nubia</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">A tranquil gateway to Africa where the Nile winds through golden dunes and ancient granite.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Upper Egypt — 5 landmarks, lesser-visited temples -->
+                        <a class="region-card" href="region.html?id=upper_egypt" aria-label="Explore Upper Egypt region">
+                            <img class="region-card-img" src="assets/images/Temple_of_Seti_I_in_Abydos/0.jpg" alt="The ancient temple of Seti I in Abydos" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">5 Landmarks</span>
+                                    <h3 class="region-card-name">Upper Egypt</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">Off the beaten path, discover incredibly preserved temples dedicated to the ancient gods.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+
+
+                        <!-- Alexandria — 9 landmarks, coastal and cosmopolitan -->
+                        <a class="region-card" href="region.html?id=alexandria" aria-label="Explore Alexandria region">
+                            <img class="region-card-img" src="assets/images/Citadel_of_Qaitbay/0.jpg" alt="The Citadel of Qaitbay overlooking the Mediterranean sea" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">9 Landmarks</span>
+                                    <h3 class="region-card-name">Alexandria</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">The Mediterranean bride, blending Greek, Roman, and Arab history along a stunning coastline.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Sinai & Red Sea — 10 landmarks, coral reefs and monasteries -->
+                        <a class="region-card" href="region.html?id=sinai_red_sea" aria-label="Explore Sinai and Red Sea region">
+                            <img class="region-card-img" src="assets/images/Saint_Catherine's_Monastery,_Mount_Sinai/0.jpg" alt="Saint Catherine's Monastery at the foot of Mount Sinai" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">10 Landmarks</span>
+                                    <h3 class="region-card-name">Sinai &amp; Red Sea</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">A paradise of vibrant coral reefs, rugged mountains, and profound spiritual heritage.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+
+                        <!-- Western Desert — 9 landmarks, off the beaten path -->
+                        <a class="region-card" href="region.html?id=western_desert" aria-label="Explore Western Desert region">
+                            <img class="region-card-img" src="assets/images/Temple_of_Hibis/0.jpg" alt="The Temple of Hibis in the Kharga Oasis" loading="lazy">
+                            <div class="region-card-overlay" aria-hidden="true">
+                                <div class="region-card-content">
+                                    <span class="region-card-tag">9 Landmarks</span>
+                                    <h3 class="region-card-name">Western Desert</h3>
+                                    
+                                    <div class="region-card-hidden">
+                                        <p class="region-card-desc">An endless expanse of rolling dunes, crystal mountains, and ancient, secluded oases.</p>
+                                        <span class="region-card-btn">Explore Region
+                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                </div><!-- end .region-grid -->
+            </div><!-- end .container -->
+        </section>
+
+        <!-- ─────────────────────────────────────────────────────
+             ABOUT SECTION
+             ───────────────────────────────────────────────────── -->
+        <section class="about-section reveal-element">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="about-title">About the Project</h2>
+                    <p class="about-text">
+                        Egypt Wonders is a comprehensive documentary experience exploring the 
+                        monuments, temples, and natural beauty that have shaped human history for 
+                        seven millennia.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+         Simple, minimal. Same on every page.
+         The team name, project name, and year.
+         ========================================================= -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>
+                Egypt Wonders
+                <span class="footer-separator">·</span>
+                Fourth Semester Web Project
+                <span class="footer-separator">·</span>
+                2026
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- =========================================================
+         SCRIPTS
+         Loaded at the bottom of <body>, AFTER all the HTML.
+         This ensures the DOM elements (nav, button) exist in memory
+         before JavaScript tries to find and use them.
+         ========================================================= -->
+    <script src="js/auth.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/reveal.js"></script>
+
+</body>
+
+</html>

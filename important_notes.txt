@@ -1,0 +1,8 @@
+Important Notice Regarding Project Assets
+
+Please note that the version of this project uploaded to the Model platform features highly compressed, lower-resolution images. This aggressive compression was necessary to meet the strict 10 MB maximum file size upload limit imposed by the platform.
+
+For the optimal viewing experience with the original high-quality, uncompressed assets, please refer to the complete project directory hosted on Google Drive:
+https://drive.google.com/drive/u/0/folders/1_9c0hRGeT04cGM_xw1-ckzcTGRCF040E
+
+Thank you for your understanding.

@@ -1,0 +1,331 @@
+/* =============================================================
+   home.css — Styles for index.html ONLY
+   =============================================================
+   This file is loaded only by index.html.
+   It handles the hero section and the geographic region groups.
+   All shared styles (nav, footer, buttons) live in global.css.
+   ============================================================= */
+
+
+/* ─────────────────────────────────────────────────────────────
+   HERO SECTION
+   Full-width area at the top of the home page with a background
+   image and centered text. Creates the cinematic first impression.
+
+   min-height: 55vh means the hero is at least 55% of the screen
+   height, but can grow taller if content requires it.
+   ───────────────────────────────────────────────────────────── */
+.hero {
+    position:        relative;
+    min-height:      100vh;
+    display:         flex;
+    align-items:     center;
+    justify-content: flex-start; /* Align content to the left */
+    text-align:      left;
+    overflow:        hidden;
+}
+
+/* The video background replacing the static image */
+.hero-video {
+    position:   absolute;
+    top:        50%;
+    left:       50%;
+    min-width:  100%;
+    min-height: 100%;
+    width:      auto;
+    height:     auto;
+    transform:  translate(-50%, -50%);
+    object-fit: cover;
+    z-index:    0;
+}
+
+/* Semi-transparent overlay that darkens the background image
+   so the white text is always readable regardless of the image */
+.hero-overlay {
+    position:         absolute;
+    inset:            0;             /* shorthand for top:0, right:0, bottom:0, left:0 */
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+/* The text content sits ABOVE the overlay (z-index: 1 > overlay's default 0) */
+.hero-content {
+    position: relative;
+    z-index:  1;
+    padding:  var(--space-lg);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   HERO ANIMATIONS
+   Staggered fade-in effect for the luxury cinematic feel
+   ───────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-eyebrow {
+    display:        block;
+    font-family:    var(--font-body);
+    font-size:      0.8rem;
+    font-weight:    600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color:          var(--accent);
+    margin-bottom:  var(--space-xs);
+    opacity:        0; /* Initial state for animation */
+    animation:      fadeInUp 0.8s ease forwards;
+    animation-delay: 0.1s;
+}
+
+.hero-title {
+    font-family:   var(--font-heading);
+    font-size:     clamp(2.5rem, 6vw, 4.5rem); /* scales between 2.5rem and 4.5rem based on screen width */
+    font-weight:   700;
+    color:         #FFFFFF;
+    line-height:   1.1;
+    margin-bottom: var(--space-sm);
+    letter-spacing: 2px;
+    opacity:        0;
+    animation:      fadeInUp 0.8s ease forwards;
+    animation-delay: 0.3s;
+}
+
+.hero-subtitle {
+    font-family: var(--font-body);
+    font-size:   1rem;
+    font-weight: 300;
+    color:       rgba(255, 255, 255, 0.8);
+    max-width:   480px;
+    margin:      0; /* Left align */
+    line-height: 1.7;
+    opacity:        0;
+    animation:      fadeInUp 0.8s ease forwards;
+    animation-delay: 0.5s;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   CTA SECTION
+   ───────────────────────────────────────────────────────────── */
+.cta-section {
+    padding: var(--space-lg) 0;
+    margin: var(--space-xl) auto;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03); /* subtle glass background */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.cta-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--text-main);
+    margin-bottom: var(--space-sm);
+}
+
+.cta-text {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   REGIONS SECTION & GRID
+   ───────────────────────────────────────────────────────────── */
+.regions-section {
+    padding: 0 0 var(--space-xl) 0;
+}
+
+.region-grid {
+    display:               grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns exactly */
+    gap:                   2rem;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   REGION CARD
+   Each card links to a region page. It shows the region's
+   thumbnail image, name, and landmark count.
+   ───────────────────────────────────────────────────────────── */
+.region-card {
+    display:         block;
+    position:        relative;
+    border-radius:   var(--radius-lg);
+    overflow:        hidden;
+    aspect-ratio:    4 / 5;
+    border:          1px solid var(--border-color);
+    box-shadow:      0 15px 40px rgba(0, 0, 0, 0.1);
+    transition:      all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor:          pointer;
+    background:      var(--bg-card);
+}
+
+
+/* The thumbnail image fills the card completely */
+.region-card-img {
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    position:   absolute;
+    top:        0;
+    left:       0;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.region-card-overlay {
+    position:        absolute;
+    inset:           0;
+    background:      linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+    display:         flex;
+    flex-direction:  column;
+    justify-content: flex-end;
+    padding:         2rem;
+    transition:      background 0.5s ease;
+}
+
+.region-card-content {
+    position: relative;
+    z-index:  2;
+}
+
+.region-card-tag {
+    display:          inline-block;
+    font-size:        0.75rem;
+    text-transform:   uppercase;
+    letter-spacing:   2px;
+    color:            #FFFFFF;
+    background-color: var(--accent);
+    padding:          6px 12px;
+    border-radius:    20px;
+    margin-bottom:    1rem;
+    font-weight:      600;
+    transition:       transform 0.4s ease;
+    transform:        translateY(20px);
+}
+
+.region-card-name {
+    font-family:    var(--font-heading);
+    font-size:      2rem;
+    line-height:    1.2;
+    margin-bottom:  0.5rem;
+    color:          #FFFFFF;
+    transform:      translateY(20px);
+    transition:     transform 0.4s ease 0.1s;
+}
+
+.region-card-hidden {
+    max-height: 0;
+    opacity:    0;
+    overflow:   hidden;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.region-card-desc {
+    font-family:        var(--font-body);
+    font-size:          0.95rem;
+    color:              rgba(255, 255, 255, 0.8);
+    margin-bottom:      1.5rem;
+    display:            -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.region-card-btn {
+    display:        inline-flex;
+    align-items:    center;
+    gap:            0.5rem;
+    font-size:      0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color:          var(--accent);
+    font-weight:    600;
+}
+
+.region-card-btn svg {
+    width:      20px;
+    height:     20px;
+    transition: transform 0.3s ease;
+}
+
+.region-card:hover {
+    transform:    translateY(-10px);
+    border-color: var(--accent);
+    box-shadow:   0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.region-card:hover .region-card-img {
+    transform: scale(1.1);
+}
+
+.region-card:hover .region-card-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.region-card:hover .region-card-hidden {
+    max-height: 150px;
+    opacity:    1;
+    margin-top: 1rem;
+}
+
+.region-card:hover .region-card-tag,
+.region-card:hover .region-card-name {
+    transform: translateY(0);
+}
+
+.region-card:hover .region-card-btn svg {
+    transform: translateX(5px);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   ABOUT SECTION
+   ───────────────────────────────────────────────────────────── */
+.about-section {
+    padding: var(--space-xl) 0;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.about-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--text-main);
+    margin-bottom: var(--space-md);
+}
+
+.about-text {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE LAYOUT
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 800px) {
+    /* On mobile/tablets, cards should stack 1 per row */
+    .region-grid {
+        grid-template-columns: 1fr;
+    }
+}
